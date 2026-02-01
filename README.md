@@ -86,9 +86,9 @@ Dans un labyrinthe, un algorithme plus efficace pour ne pas se perdre consiste �
 
 ## Séance 2 : Git pull, invite de commande, et fonctions récursives (1h30)
 
-### Mise à jour du dépot
+### Mise à jour du dépôt
 
-Depuis l'environnement créé lors de la première séance, nous allons récupérer les ajouts faits à la base de code. Le logiciel Git permet de mettre à jour votre dépôt local (ici Onyxia) depuis le dépot distant (ici GitHub).
+Depuis l'environnement créé lors de la première séance, nous allons récupérer les ajouts faits à la base de code. Le logiciel Git permet de mettre à jour votre dépôt local (ici Onyxia) depuis le dépôt distant (ici GitHub).
 
 ```
 +------------------------------------+---------------------+
@@ -102,7 +102,7 @@ Depuis l'environnement créé lors de la première séance, nous allons récupé
 +--------------------+---------------+---------------------+
 ```
 
-L'opération "Fetch" permet de récupérer les modifications du dépot distant, et de les importer dans le dépot local. L'opération "Merge" permet de mettre à jour le dossier de travail avec le dépot local. L'opération "Pull" combine "Fetch" puis "Merge".
+L'opération "Fetch" permet de récupérer les modifications du dépôt distant, et de les importer dans le dépôt local. L'opération "Merge" permet de mettre à jour le dossier de travail avec le dépôt local. L'opération "Pull" combine "Fetch" puis "Merge".
 
 Attention, si des modifications locales et distantes concernent le même fichier, cela crée un conflit. Personne n'aime les conflits, nous essaierons de les éviter dès que possible (nous verrons comment les gérer lors des prochaines séances).
 
@@ -133,7 +133,7 @@ Nous allons (enfin) revenir à nos robots. Nous vous rappelons que l'objectif es
 
 #### Stratégie simples
 
-Commençons par terminer d'implémenter les stratégies naïves de la première séance. Afin de pouvoir changer d'exmple plus facilement, nous souhaitons pouvoir fournir en paramètre le nom du fichier à lire, par exemple :
+Commençons par terminer d'implémenter les stratégies naïves de la première séance. Afin de pouvoir changer d'exemple plus facilement, nous souhaitons pouvoir fournir en paramètre le nom du fichier à lire, par exemple :
 ```
 python code/main_random_walk.py examples/medium.txt
 ```
@@ -154,7 +154,7 @@ def fonction_recursive(i, lst):
     fonction_recursive(2*i+1, lst)
 
 res = []
-fonction_recursive(0, res)
+fonction_recursive(1, res)
 print(res)
 ```
 
