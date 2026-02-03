@@ -127,25 +127,32 @@ L'invite de commande (*terminal* en anglais) est un explorateur de fichier perme
 |   +-- fichier3.csv
 ```
 
+L'invite de commande permet aussi de lancer l'exécution de programmes. Par exemple, lancer l'exécution du fichier `main_sandbox.py` depuis VS-Code (petit triangle) est un raccourci pour la commande "`python code/main_sandbox.py`" (ou équivalente).
+
+Afin de pouvoir tester des exemples différents avec le même code python, nous allons utiliser la possibilité de fournir un paramètre à une commande. 
+
+***Question 3.*** Dans le fichier `main_sandbox.py` ajouter les lignes suivante :
+```python
+import sys
+print(sys.argv)
+```
+Qu'obtient on avec la commande "`python code/main_sandbox.py`" ? Et avec la commande "`python code/main_sandbox.py examples/medium.txt`" ? Expliquer les résultats en utilisant la [documentation du module sys](https://docs.python.org/3/library/sys.html).
+
 ### Revenons à nos robots
 
 Nous allons (enfin) revenir à nos robots. Nous vous rappelons que l'objectif est de faire parvenir le robot à l'arrivée, en utilisant uniquement les méthodes `move` et `at_goal` ainsi que l'attribut `position` de la classe `Robot`.
 
 #### Stratégie simples
 
-Commençons par terminer d'implémenter les stratégies naïves de la première séance. Afin de pouvoir changer d'exemple plus facilement, nous souhaitons pouvoir fournir en paramètre le nom du fichier à lire, par exemple :
-```
-python code/main_random_walk.py examples/medium.txt
-```
-Pour ce faire, allez lire la [documentation du module sys](https://docs.python.org/3/library/sys.html) pour apprendre à utiliser la variable `argv`.
+Commençons par terminer d'implémenter les stratégies naïves de la première séance. Afin de pouvoir changer d'exemple plus facilement, nous souhaitons pouvoir fournir en paramètre le nom du fichier à lire en utilisant la variable `sys.argv`.
 
-***Question 3.*** Terminez les questions 8 et 9 de la séance 1, et ajoutez la possibilité de fournir un nom de fichier en paramètre. Les stratégies implémentées fonctionnent elles sur tous les fichiers de test ? 
+***Question 4.*** Terminez les questions 7 et 9 de la séance 1, et ajoutez la possibilité de fournir un nom de fichier en paramètre. Les stratégies implémentées fonctionnent elles sur tous les fichiers d'exemple ? 
 
 #### Parcours en profondeur
 
 Nous allons implémenter une stratégie récursive qui explore tout le labyrinthe. Il s'agit de l'algorithme de parcours en profondeur (DFS, pour *Depth-First Search* en anglais). Nous vous recommandons de consulter la [page wikipedia](https://fr.wikipedia.org/wiki/Algorithme_de_parcours_en_profondeur) sur cet algorithme.
 
-***Questions 4.*** Expliquer ce que l'on obtient-on en exécutant le code :
+***Questions 5.*** Expliquer ce que l'on obtient-on en exécutant le code :
 ```python
 def fonction_recursive(i, lst):
   if i < 10:
@@ -158,4 +165,4 @@ fonction_recursive(1, res)
 print(res)
 ```
 
-***Question 5.*** Dans un fichier `main_dfs.py`, implémentez une fonction récursive `dfs(robot, deja_vu)` qui explore le labyrinthe, renvoie `True` dès que le robot atteint l'arrivée, et renvoie `False` si le robot est revenu au point de départ sans trouver l'arrivée. Parvenez vous à résoudre tous les labyrinthes ?
+***Question 6.*** Dans un fichier `main_dfs.py`, implémentez une fonction récursive `dfs(robot, deja_vu)` qui explore le labyrinthe, renvoie `True` dès que le robot atteint l'arrivée, et renvoie `False` si le robot est revenu au point de départ sans trouver l'arrivée. Parvenez vous à résoudre tous les labyrinthes ?
