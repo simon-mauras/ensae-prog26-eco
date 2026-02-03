@@ -21,12 +21,12 @@ DIRECTIONS = ["UP", "RIGHT", "DOWN", "LEFT"]
 step = 0
 while not robot.at_goal() and step <= 10**5:
     step += 1
-    print(robot)
-    directions = list(DIRECTIONS)
-    random.shuffle(directions)
-    for d in directions:
-        if robot.move(d):
-            break
+    print(robot, end="")
+    i = random.randrange(4)
+    if robot.move(DIRECTIONS[i]):
+        print(f"Moving {DIRECTIONS[i]} successful.")
+    else:
+        print(f"Moving {DIRECTIONS[i]} impossible")
 
 if robot.at_goal():
     print(f"Goal reached at {robot.position} with cost {robot.cost}.")
