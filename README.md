@@ -150,7 +150,7 @@ Commençons par terminer d'implémenter les stratégies naïves de la première 
 
 #### Parcours en profondeur
 
-Nous allons implémenter une stratégie récursive qui explore tout le labyrinthe. Il s'agit de l'algorithme de parcours en profondeur (DFS, pour *Depth-First Search* en anglais). Nous vous recommandons de consulter la [page wikipedia](https://fr.wikipedia.org/wiki/Algorithme_de_parcours_en_profondeur) sur cet algorithme.
+Nous allons implémenter une stratégie récursive qui explore tout le labyrinthe. Il s'agit de l'algorithme de parcours en profondeur (DFS, pour *Depth-First Search* en anglais). Nous vous recommandons de consulter la [page wikipédia](https://fr.wikipedia.org/wiki/Algorithme_de_parcours_en_profondeur) sur cet algorithme.
 
 ***Questions 5.*** Expliquer ce que l'on obtient-on en exécutant le code :
 ```python
@@ -166,3 +166,52 @@ print(res)
 ```
 
 ***Question 6.*** Dans un fichier `main_dfs.py`, implémentez une fonction récursive `dfs(robot, deja_vu)` qui explore le labyrinthe, renvoie `True` dès que le robot atteint l'arrivée, et renvoie `False` si le robot est revenu au point de départ sans trouver l'arrivée. Parvenez vous à résoudre tous les labyrinthes ?
+
+\newpage
+
+## Séance 3&4 : Plus court chemin (3h)
+
+Dans cette (double) séance, nous allons aborder la théorie des graphes, comment elle nous permet de modéliser notre problème de labyrinthe, et quels sont les algorithmes pour calculer un plus court chemin.
+
+***Question 1.***  Depuis l'onglet Git de VS-Code, lancer une opération "Pull". Comparez les solutions pour les stratégies "aléatoire" et "suivre le mur" avec vos implémentations.
+
+***Question 2.*** Finissez l'implémentation de la stratégie "récursive" dans le fichier `main_dfs.py`. N'hésitez pas à demander de l'aide à votre chargé de TP !
+
+### Théorie des graphes
+
+Un graphe est un objet mathématique permettant de modéliser divers scénarios (réseau routier, réseau social, jeu à deux joueurs, ...).
+
+***Question 3.*** Allez lire la [page wikipédia](https://fr.wikipedia.org/wiki/Graphe_(mathématiques_discrètes)) sur les graphes. Nous allons modéliser notre problème avec un graphe orienté et pondéré. Quels sont les sommets ? Quels sont les poids des arêtes ? Quelle est la question à résoudre dans ce graphe ?
+
+### Parcours de graphe
+
+Dans le parcours en profondeur que vous avez implémenté, le robot se promène récursivement sur toutes les cases du labyrinthe. Par exemple, on peut avoir le parcours suivant, ou les cases sont numérotées dans l'ordre dans lequel elles sont découvertes pour la première fois.
+```
+######
+#S123#
+##4###
+#8567#
+######
+```
+Dans un parcours en largeur (BFS, pour *Breadth-First Search* en anglais), les cases sont parcourues par distance au départ croissante (où la distance est nombre minimal de cases à traverser). Par exemple, les cases peuvent être découvertes dans l'ordre suivant :
+```
+######
+#S124#
+##3###
+#7568#
+######
+```
+On remarquera que si un seul robot devait explorer les cases dans cet ordre là, il ferait beaucoup de chemin inutile. Par conséquent, un parcours en largeur crée une "copie" du robot à chaque fois qu'il découvre une nouvelle case. Pour traiter les copies par ordre de création, nous les stockerons dans une "file" implémentée par le type `collections.deque`. Nous vous recommandons de consulter la [documentation du module collections](https://docs.python.org/3/library/collections.html#collections.deque) ainsi que la [page wikipédia](https://fr.wikipedia.org/wiki/Algorithme_de_parcours_en_profondeur) sur le parcours en largeur.
+
+***Question 4.*** Afin de pouvoir créer une copie du robot, implémentez une méthode `copy(self)` dans la classe `Robot` qui renvoie une copie du robot, avec la même position et le même coût. Attention, il ne faut pas se contenter de renvoyer l'objet actuel car on veut pouvoir déplacer la copie du robot sans déplacer l'original !!
+
+***Question 5.*** Dans un fichier `main_bfs.py` implémentez l'algorithme du parcours en largeur, qui stocke dans une "file" toute nouvelle copie de robot lors de la découverte d'une nouvelle case, et les traite par ordre de création.
+
+### Algorithme de Dijkstra
+
+Le parcours en largeur permet de calculer le chemin dans un graphe qui utilise le moins d'arête possible. Cependant, dans notre problème, chaque arête a un coût (entier entre 0 et 9). L'algorithme de Dijkstra permet de calculer le chemin de coût minimal. Pour ce faire, on parcourt les sommets par distance au départ croissante (où la distance est le coût minimal des arêtes à traverser), en remplaçant la "file" du parcours en largeur par une "file à priorité" implémentée par le module `heapq`. Nous vous recommandons de consulter la [documentation du module heapq](https://docs.python.org/3/library/heapq.html) ainsi que la [page wikipédia](https://fr.wikipedia.org/wiki/Algorithme_de_parcours_en_profondeur) sur l'algorithme de Dijkstra.
+
+***Question 6.*** Afin de pouvoir comparer deux copies du robot, et savoir laquelle doit être traitée en premier, implémentez une méthode `__lt__(self, other)` dans la classe `Robot`, qui compare les coût du robot `self` et du robot `other`. Il sera désormais possible de faire la comparaison `robot1 < robot2` qui sera évaluée par Python avec l'appel de fonction `__lt__(robot1, robot2)`.
+
+***Question 7.*** Dans un fichier `main_dijkstra.py` implémentez l'algorithme de Dijkstra, qui stocke dans une "file à priorité" toute nouvelle copie de robot lors de la découverte d'une nouvelle case, et les traite par coût croissant.
+
