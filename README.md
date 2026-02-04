@@ -205,13 +205,13 @@ On remarquera que si un seul robot devait explorer les cases dans cet ordre là,
 
 ***Question 4.*** Afin de pouvoir créer une copie du robot, implémentez une méthode `copy(self)` dans la classe `Robot` qui renvoie une copie du robot, avec la même position et le même coût. Attention, il ne faut pas se contenter de renvoyer l'objet actuel car on veut pouvoir déplacer la copie du robot sans déplacer l'original !!
 
-***Question 5.*** Dans un fichier `main_bfs.py` implémentez l'algorithme du parcours en largeur, qui stocke dans une "file" toute nouvelle copie de robot lors de la découverte d'une nouvelle case, et les traite par ordre de création.
+***Question 5.*** Dans un fichier `main_bfs.py` implémentez l'algorithme du parcours en largeur, qui stocke dans une "file" toute copie de robot créée lors de la découverte d'une nouvelle case, et les traite par ordre de création.
 
 ### Algorithme de Dijkstra
 
-Le parcours en largeur permet de calculer le chemin dans un graphe qui utilise le moins d'arête possible. Cependant, dans notre problème, chaque arête a un coût (entier entre 0 et 9). L'algorithme de Dijkstra permet de calculer le chemin de coût minimal. Pour ce faire, on parcourt les sommets par distance au départ croissante (où la distance est le coût minimal des arêtes à traverser), en remplaçant la "file" du parcours en largeur par une "file à priorité" implémentée par le module `heapq`. Nous vous recommandons de consulter la [documentation du module heapq](https://docs.python.org/3/library/heapq.html) ainsi que la [page wikipédia](https://fr.wikipedia.org/wiki/Algorithme_de_parcours_en_profondeur) sur l'algorithme de Dijkstra.
+Le parcours en largeur permet de calculer le chemin dans un graphe qui utilise le moins d'arête possible. Cependant, dans notre problème, chaque arête a un coût (entier entre 0 et 9). L'algorithme de Dijkstra permet de calculer le chemin de coût minimal. Pour ce faire, on parcourt les sommets par distance au départ croissante (où la distance est le coût minimal des arêtes à traverser), en remplaçant la "file" du parcours en largeur par une "file à priorité" implémentée par le module `heapq`. Nous vous recommandons de consulter la [documentation du module heapq](https://docs.python.org/3/library/heapq.html) ainsi que la [page wikipédia](https://fr.wikipedia.org/wiki/Algorithme_de_Dijkstra) sur l'algorithme de Dijkstra.
 
 ***Question 6.*** Afin de pouvoir comparer deux copies du robot, et savoir laquelle doit être traitée en premier, implémentez une méthode `__lt__(self, other)` dans la classe `Robot`, qui compare les coût du robot `self` et du robot `other`. Il sera désormais possible de faire la comparaison `robot1 < robot2` qui sera évaluée par Python avec l'appel de fonction `__lt__(robot1, robot2)`.
 
-***Question 7.*** Dans un fichier `main_dijkstra.py` implémentez l'algorithme de Dijkstra, qui stocke dans une "file à priorité" toute nouvelle copie de robot lors de la découverte d'une nouvelle case, et les traite par coût croissant.
+***Question 7.*** Dans un fichier `main_dijkstra.py` implémentez l'algorithme de Dijkstra, qui stocke dans une "file à priorité" toute copie de robot créée lors de la découverte d'une nouvelle case, et les traite par coût croissant.
 
